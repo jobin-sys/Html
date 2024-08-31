@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+          let itemlist=['banaa','appale','mango','grapes'];
+        const save =()=>{
+            
+            let a=document.getElementById("newitem").value;//how to take value text box
+            itemlist.push(a);//push new element at end of array
+            document.getElementById("newitem").value=""; //how to clear text box
+            
+        getitemlist();//call back a function to reload the list after adding new item
+        }
+        const getitemlist=()=>{
+            let data="";
+            for(let i=0;i<itemlist.length;i++){
+                data=data + "<tr>";
+                    data=data+"<td>" +i+"</td>";
+                     data=data+"<td>" +itemlist[i]+"</td>";
+                     data=data+"<td><button onclick=deleteAny("+ i +")>Delete</button></td>";
+
+                    data=data + "</tr>";
+
+                //data = data +"<p>" + itemlist[i]+"<button onclick=deleteAny("+ i +")>delete</button></p>";
+            }
+            document.getElementById("container").innerHTML=data;
+            
+            document.getElementById("total").innerText=itemlist.length+":item in array";
+
+        }
+        const deletefirst=()=>{
+           
+            itemlist.shift();
+            getitemlist();//reload availalable item after delete
+           
+
+        }
+        const deletelast=()=>{
+           
+           itemlist.pop();
+           getitemlist();//reload availalable item after delete
+          
+
+       }
+       const deleteAny = (index)=>{
+        itemlist.splice(index,1);
+        getitemlist();
+       }
+
+    </script>
+    
+</head>
+<body>
+    <h1>Add,List,Edit,Delete single dimensional array</h1>
+    <p>Enter any item name:<input type="text" id="newitem"/>
+    <button onclick="save()">save</button></p>
+    <button onclick="deletefirst()">Delete 1st</button></p>
+    <button onclick="deletelast()">Delete last</button></p>
+    <h2 id="total">0item</h2>
+     <table align="center" cellpaddin="15" border="1" cellspacing="0" bordercolor="blue">
+        <thead>
+            <tr>
+                <th>Sl No</th>
+                <th>Item name</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+    <tbody id="container"></tbody>
+
+   </table>
+    
+</body>
+</html>

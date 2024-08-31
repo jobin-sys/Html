@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        p{
+            font-size: 20px;
+            color: blue;
+        }
+        fieldset{
+            margin: 40px;
+            display: inline-block;
+            vertical-align: top;
+            width: 400px;
+            border: 5px solid orange;
+            background-color: rgb(222, 232, 222);
+        }
+        legend{
+            background: purple;
+            color: white;
+            font-size: 20px;
+            padding: 7px 30px 7px;
+
+        }
+    </style>
+    <script>
+        let firstlist=['Bangalore','Mumbai','Delhi','Chennai','Kolkatta','Mangalore'];
+        let secondlist=[];
+        const readfirst =()=>{
+            let data="";
+            for(let i=0;i<firstlist.length;i++){
+                data=data+`<p> ${firstlist[i]}  ---<button onclick=ilike(${i})>I like</button> </p>`;
+            }
+            document.getElementById("allcity").innerHTML=data;
+            document.getElementById("one").innerText=firstlist.length+":available city";
+        }
+        const readsecond=()=>{
+            let data="";
+            for(let i=0;i<secondlist.length;i++){
+                data=data+`<p> ${secondlist[i]}  ---<button onclick=idonotlike(${i})>I donot like</button> </p>`;
+            }
+            document.getElementById("mycity").innerHTML=data;
+            document.getElementById("two").innerText=secondlist.length+":selected city";
+
+        }
+        const ilike=(index)=>{
+            
+            secondlist.push(firstlist[index]);
+            firstlist.splice(index,1);
+            readsecond();
+            readfirst();
+        }
+        const idonotlike=(index)=>{
+            
+            firstlist.push(secondlist[index]);
+            secondlist.splice(index,1);
+            readsecond();
+            readfirst();
+        }
+
+    </script>
+   
+</head>
+<body onload="readfirst()">
+    <h1 align="center">Array add List</h1>
+    <fieldset>
+        <legend id="one"> available city</legend>
+        <div id="allcity"></div>
+
+    </fieldset>
+    <fieldset>
+        <legend id="two"> selected city</legend>
+        <div id="mycity"></div>
+
+    </fieldset>
+    
+    
+</body>
+</html>
